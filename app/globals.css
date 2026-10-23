@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Base design tokens (dark-first, premium SaaS) ─── */
+:root {
+  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius: 14px;
+  --accent: 255 255 255;
+  --accent-strong: 255 255 255;
+  --accent-soft: 255 255 255 / 0.12;
+  --glow: 255 255 255 / 0.14;
+}
+
+/* Light mode base */
+.light {
+  --bg: 250 250 249;
+  --bg-elev: 255 255 255;
+  --fg: 12 12 13;
+  --muted: 99 102 109;
+  --line: 12 12 13 / 0.1;
+  --surface: 255 255 255;
+  --card: 255 255 255 / 0.8;
+  color-scheme: light;
+}
+/* Dark mode base */
+.dark, :root:not(.light) {
+  --bg: 8 8 10;
+  --bg-elev: 14 14 17;
+  --fg: 245 245 244;
+  --muted: 161 161 170;
+  --line: 255 255 255 / 0.09;
+  --surface: 16 16 19;
+  --card: 20 20 24 / 0.72;
+  color-scheme: dark;
+}
+
+/* ─── Accent colorways (user-selectable) ─── */
+[data-accent="ink"]    { --accent: 245 245 244; --accent-strong: 255 255 255; --glow: 255 255 255 / 0.16; }
+[data-accent="snow"]   { --accent: 31 41 55;   --accent-strong: 17 24 39;    --glow: 148 163 184 / 0.25; }
+[data-accent="blush"]  { --accent: 244 114 182;--accent-strong: 251 182 206; --glow: 244 114 182 / 0.28; }
+[data-accent="honey"]  { --accent: 250 204 21; --accent-strong: 254 240 138; --glow: 250 204 21 / 0.25; }
+[data-accent="moss"]   { --accent: 52 211 153; --accent-strong: 110 231 183; --glow: 52 211 153 / 0.25; }
+[data-accent="azure"]  { --accent: 96 165 250; --accent-strong: 147 197 253; --glow: 96 165 250 / 0.28; }
+[data-accent="maroon"] { --accent: 248 113 113;--accent-strong: 252 165 165; --glow: 127 29 29 / 0.45; }
+
+.light[data-accent="snow"]   { --accent: 17 24 39;  --accent-strong: 0 0 0; }
+.light[data-accent="ink"]    { --accent: 12 12 13;  --accent-strong: 0 0 0; --glow: 0 0 0 / 0.12; }
+.light[data-accent="maroon"] { --accent: 153 27 27; --accent-strong: 127 29 29; }
+.light[data-accent="blush"]  { --accent: 219 39 119;--accent-strong: 190 24 93; }
+.light[data-accent="honey"]  { --accent: 161 98 7;  --accent-strong: 133 77 14; }
+.light[data-accent="moss"]   { --accent: 4 120 87;  --accent-strong: 6 95 70; }
+.light[data-accent="azure"]  { --accent: 29 78 216; --accent-strong: 30 64 175; }
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --color-bg: rgb(var(--bg));
+  --color-elev: rgb(var(--bg-elev));
+  --color-fg: rgb(var(--fg));
+  --color-muted: rgb(var(--muted));
+  --color-surface: rgb(var(--surface));
+  --color-accent: rgb(var(--accent));
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* film grain */
+.grain::after {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hairline { border: 1px solid rgb(var(--line)); }
+.text-balance { text-wrap: balance; }
+
+::selection { background: rgb(var(--accent) / 0.28); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+:focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; border-radius: 6px; }
+/* Text fields get their own focus affordance (caret + pill highlight); the
+   global outline just looks like a stray border inside the input bar. */
+input:focus-visible,
+textarea:focus-visible { outline: none; }
+
+/* thin scrollbars */
+* { scrollbar-width: thin; scrollbar-color: rgb(var(--line)) transparent; }
+
+/* platform marquee */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 30s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+/* ═══ hero backdrop motion ═══ */
+@keyframes grid-pan {
+  from { background-position: 0 0; }
+  to { background-position: 60px 120px; }
+}
+.grid-pan { animation: grid-pan 26s linear infinite; }
+
+@property --ring-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes ring-spin { to { --ring-angle: 360deg; } }
+.platform-ring {
+  background: conic-gradient(
+    from var(--ring-angle),
+    transparent 0turn,
+    transparent 0.66turn,
+    var(--ring-color) 0.9turn,
+    transparent 1turn
+  );
+  animation: ring-spin 4s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) { .platform-ring { animation: none; } }
+
+/* giant conic spotlight — one slow sweep behind the hero */
+@keyframes beam-spin {
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+.beam-spin { animation: beam-spin 60s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .beam-spin { animation: none; } }
+
+/* aurora blobs — slow multi-axis drift, each with its own period */
+@keyframes aurora-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(7%, 11%, 0) scale(1.15); }
+}
+.aurora-a { animation: aurora-a 26s ease-in-out infinite alternate; }
+@keyframes aurora-b {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-8%, 9%, 0) scale(1.1); }
+}
+.aurora-b { animation: aurora-b 22s ease-in-out infinite alternate; }
+@keyframes aurora-c {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(6%, -9%, 0) scale(1.18); }
+}
+.aurora-c { animation: aurora-c 31s ease-in-out infinite alternate; }
+@keyframes blob-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-4%, 6%, 0) scale(1.12); }
+}
+.blob-drift { animation: blob-drift 16s ease-in-out infinite alternate; }
+
+/* vertical light shafts sweeping down the hero */
+@keyframes beam-sweep {
+  0% { transform: translateY(-12%); opacity: 0; }
+  12% { opacity: 0.55; }
+  88% { opacity: 0.55; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+.beam-sweep { animation: beam-sweep 13s linear infinite; }
+
+/* gentle gravitational float for scattered platform glyphs */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+.float-y { animation: float-y 8s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-pan, .beam-sweep, .float-y, .aurora-a, .aurora-b, .aurora-c, .blob-drift { animation: none; }
+}
