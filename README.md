@@ -49,13 +49,19 @@ Out of the box: platform detection, metadata + thumbnails (oEmbed/Reddit JSON),
 preview UI, safe downloads of whatever direct URLs the source exposes.
 
 For direct video files (YouTube videos, Facebook clips, Pinterest pins,
-Vimeo videos…), self-host
-[Cobalt](https://github.com/imputnet/cobalt) and set in `.env.local`:
+Vimeo videos…), run
+[Cobalt](https://github.com/imputnet/cobalt) on an always-on host (local machine,
+a VPS, or Google Cloud Run) and set in `.env.local`:
 
 ```bash
-COBALT_API_URL=https://your-host/   # current versions (POST /), or …/api/getMedia for classic
+COBALT_API_URL=https://your-cobalt-host/   # current versions (POST /), or …/api/getMedia for classic
 COBALT_API_KEY=optional-if-your-instance-needs-it
 ```
+
+> If the Cobalt instance is publicly reachable (e.g. a Cloud Run URL), protect
+> it with an API key — anyone who finds the URL can burn your bandwidth and
+> cookies otherwise. Never commit the live URL to a public repo; keep it in
+> `.env.local` (gitignored) and in your host's env settings.
 
 …then restart the dev server. Adapters call it with a 25s timeout and merge
 returned files with oEmbed metadata; classic `redirect`/`picker` shapes and new
