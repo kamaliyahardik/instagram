@@ -4,7 +4,9 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import "@/app/globals.css";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+import { SITE_URL } from "@/lib/site";
+
+const APP_URL = SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
@@ -82,6 +84,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="grain min-h-screen antialiased">
+        {/* Always start at the top on a fresh load — never restore the scroll
+            position mid-page (which used to land visitors on the footer). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}",
+          }}
+        />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SITE_JSON_LD) }} />
         <ThemeProvider>
           <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[rgb(var(--accent))] focus:px-4 focus:py-2 focus:text-sm">

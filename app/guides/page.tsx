@@ -8,7 +8,9 @@ import { GUIDES } from "@/lib/guides";
 import { PLATFORM_META } from "@/lib/resolver/detector";
 import { brandColor } from "@/lib/platform-pages";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+import { SITE_URL } from "@/lib/site";
+
+const APP_URL = SITE_URL;
 
 export const metadata: Metadata = {
   title: "Download Guides — How to Save Videos & Photos from Every Platform",

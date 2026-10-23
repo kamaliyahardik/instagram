@@ -154,7 +154,7 @@ function HomeInner() {
               <Badge><Sparkles size={12} /> Universal media downloader</Badge>
             </motion.div>
 
-            <h1 className="text-balance mt-8 text-[clamp(3.6rem,11vw,8.2rem)] font-semibold leading-[0.9] tracking-[-0.055em]">
+            <h1 className="text-balance mt-7 text-[clamp(3rem,11vw,8.2rem)] font-semibold leading-[0.9] tracking-[-0.055em] sm:mt-8">
               <Word i={0}>Paste</Word> <Word i={1}>a</Word> <Word i={2}>link.</Word>
               <br />
               <Word i={3}>Save</Word> <Word i={4}>anything.</Word>

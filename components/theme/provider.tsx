@@ -36,7 +36,7 @@ function AccentApplier({ children }: { children: React.ReactNode }) {
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
+    <NextThemesProvider attribute="class" defaultTheme="light" enableSystem={false}>
       <AccentApplier>{children}</AccentApplier>
     </NextThemesProvider>
   );

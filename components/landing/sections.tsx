@@ -57,7 +57,7 @@ export function LiveStats() {
   if (!s || s.total === 0) return null;
   return (
     <section className="border-b border-[rgb(var(--line))] bg-[rgb(var(--elev))]">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-12 gap-y-4 px-5 py-8">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-4 px-4 sm:gap-x-12 sm:px-5 py-7 sm:py-8">
         <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-[rgb(var(--muted))]">
           <span className="relative flex h-2 w-2">
             <span className="absolute h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
@@ -71,8 +71,8 @@ export function LiveStats() {
           { v: <CountUp to={s.avgMs} suffix="ms" />, k: "avg response" },
         ].map((x) => (
           <span key={x.k} className="inline-flex items-baseline gap-2">
-            <span className="text-3xl font-semibold tracking-tight">{x.v}</span>
-            <span className="text-sm text-[rgb(var(--muted))]">{x.k}</span>
+            <span className="text-2xl font-semibold tracking-tight sm:text-3xl">{x.v}</span>
+            <span className="text-xs text-[rgb(var(--muted))] sm:text-sm">{x.k}</span>
           </span>
         ))}
       </div>
@@ -310,11 +310,11 @@ export function StickyShowcase() {
           className="pointer-events-none absolute inset-0 transition-all duration-700"
           style={{ background: `radial-gradient(55% 48% at 70% 42%, ${meta.color}1A, transparent 70%)` }}
         />
-        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-[1fr_1.05fr] items-center gap-16 px-5">
+        <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 md:grid-cols-[1fr_0.95fr] lg:grid-cols-[1fr_1.05fr] lg:gap-16">
           {/* left: heading + adaptive rail */}
           <div>
             <Badge>Watch it adapt</Badge>
-            <h2 className="mt-4 text-4xl font-semibold tracking-tight lg:text-5xl">
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
               Paste anything.
               <br />
               <span className="text-[rgb(var(--muted))]">It just knows.</span>
@@ -509,10 +509,10 @@ export function HowItWorks() {
               transition={{ delay: i * 0.1, duration: 0.6, ease: EASE }}
               className="relative"
             >
-              <p aria-hidden className="text-[88px] font-bold leading-none tracking-tighter text-[rgb(var(--line))]">
+              <p aria-hidden className="text-[64px] font-bold leading-none tracking-tighter text-[rgb(var(--line))] sm:text-[88px]">
                 {s.n}
               </p>
-              <h3 className="-mt-8 text-2xl font-semibold tracking-tight">{s.t}</h3>
+              <h3 className="-mt-8 text-xl font-semibold tracking-tight sm:text-2xl">{s.t}</h3>
               <p className="mt-2 leading-relaxed text-[rgb(var(--muted))]">{s.d}</p>
             </motion.div>
           ))}
@@ -626,7 +626,7 @@ export function Features() {
       <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
         Fast. Minimal. Premium. <span className="text-[rgb(var(--muted))]">Universal.</span>
       </h2>
-      <div className="mt-10 grid gap-3 md:grid-cols-6">
+      <div className="mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-6">
         {FEATS.map((f, i) => (
           <motion.div
             key={f.t}
@@ -806,7 +806,7 @@ export function Faq() {
 export function FinalCta() {
   return (
     <section className="mx-auto max-w-6xl px-5 pb-28">
-      <Card className="relative overflow-hidden px-6 py-20 text-center sm:py-28">
+      <Card className="relative overflow-hidden px-5 py-14 text-center sm:px-6 sm:py-28">
         <div
           className="pointer-events-none absolute inset-0"
           style={{ background: "radial-gradient(60% 90% at 50% 0%, rgb(var(--glow)), transparent 70%)" }}
@@ -819,7 +819,7 @@ export function FinalCta() {
           className="relative"
         >
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[rgb(var(--muted))]">Ready when you are</p>
-          <h2 className="text-balance mx-auto mt-4 max-w-2xl text-5xl font-semibold tracking-tight sm:text-7xl">
+          <h2 className="text-balance mx-auto mt-4 max-w-2xl text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
             Paste. Preview. Download.
           </h2>
           <p className="mx-auto mt-4 max-w-md text-[rgb(var(--muted))]">

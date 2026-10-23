@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import StatusClient from "./status-client";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+import { SITE_URL } from "@/lib/site";
+
+const APP_URL = SITE_URL;
 
 export const metadata: Metadata = {
   title: "Service Status — Is FetchMedia Working Right Now?",

@@ -4,7 +4,9 @@ import { ArrowUpRight, Eye, Gauge, HeartHandshake, Lock, ShieldCheck, Zap } from
 import { Badge, Card } from "@/components/ui/primitives";
 import { Reveal, SpotlightCard } from "@/components/platform/islands";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+import { SITE_URL } from "@/lib/site";
+
+const APP_URL = SITE_URL;
 
 export const metadata: Metadata = {
   title: "About FetchMedia — Fast, Honest, Privacy-First Media Saving",

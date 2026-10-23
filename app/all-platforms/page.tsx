@@ -9,7 +9,9 @@ import { PLATFORM_SLUGS, brandColor } from "@/lib/platform-pages";
 import { GUIDES } from "@/lib/guides";
 import type { Platform } from "@/types/media";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+import { SITE_URL } from "@/lib/site";
+
+const APP_URL = SITE_URL;
 
 export const metadata: Metadata = {
   title: "All Downloaders — Every Supported Platform in One Place",

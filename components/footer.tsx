@@ -32,8 +32,8 @@ export function Footer() {
     },
   ];
   return (
-    <footer className="border-t border-[rgb(var(--line))] py-16">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+    <footer className="border-t border-[rgb(var(--line))] py-12 sm:py-16">
+      <div className="mx-auto grid max-w-6xl gap-8 px-5 sm:gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div>
           <p className="text-lg font-semibold tracking-tight">FetchMedia</p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-[rgb(var(--muted))]">

@@ -9,7 +9,9 @@ import { GUIDES, guideBySlug } from "@/lib/guides";
 import { PLATFORM_META } from "@/lib/resolver/detector";
 import { PLATFORM_SLUGS, brandColor } from "@/lib/platform-pages";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+import { SITE_URL } from "@/lib/site";
+
+const APP_URL = SITE_URL;
 
 type Props = { params: Promise<{ guide: string }> };
 
